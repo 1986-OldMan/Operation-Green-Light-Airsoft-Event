@@ -1,0 +1,315 @@
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #e8e4dc;
+      font-family: 'Courier New', Courier, monospace;
+      color: #1a1a0a;
+      padding: 20px;
+    }
+
+    /* ── SCREEN BUTTONS ── */
+    .btn-bar {
+      text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: #1a1a0a;
+      color: #e8e4dc;
+      border: none;
+      padding: 10px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #333; }
+    .btn-back {
+      background: transparent;
+      color: #555;
+      border: 1px solid #555;
+      padding: 10px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* ── A4 PAGE ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #f5f0e8;
+      margin: 0 auto 30px auto;
+      padding: 14mm 16mm 18mm 16mm;
+      box-shadow: 2px 2px 14px rgba(0,0,0,0.25);
+      position: relative;
+      page-break-after: always;
+      border: 1px solid #c8b89a;
+    }
+
+    /* ── AGED PAPER TEXTURE VIA GRADIENT ── */
+    .page::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(180,140,80,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 80%, rgba(160,120,60,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── WATERMARKS ── */
+    .wm-classified {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 68px;
+      font-weight: 900;
+      color: rgba(160,0,0,0.07);
+      letter-spacing: 6px;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+    .wm-cia {
+      position: absolute;
+      bottom: 40mm; right: 14mm;
+      font-size: 44px;
+      font-weight: 900;
+      color: rgba(0,0,100,0.05);
+      letter-spacing: 4px;
+      pointer-events: none;
+      transform: rotate(-20deg);
+      z-index: 0;
+    }
+
+    /* ── CONTENT Z-INDEX ── */
+    .page > *:not(.wm-classified):not(.wm-cia) { position: relative; z-index: 1; }
+
+    /* ── CIA HEADER STRIP ── */
+    .cia-header {
+      border-top: 3px solid #1a1a0a;
+      border-bottom: 1px solid #1a1a0a;
+      padding: 5px 0 4px 0;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .cia-logo-block { display: flex; align-items: center; gap: 8px; }
+    .cia-seal {
+      width: 36px; height: 36px;
+      border: 2px solid #1a1a0a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: bold;
+    }
+    .cia-agency { font-size: 11px; font-weight: bold; letter-spacing: 3px; }
+    .cia-sub    { font-size: 8px;  letter-spacing: 2px; color: #555; margin-top: 1px; }
+    .cia-meta   { font-size: 8px; letter-spacing: 1px; text-align: right; line-height: 1.8; color: #444; }
+
+    .classification-banner {
+      text-align: center;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      color: #8a0000;
+      border: 2px solid #8a0000;
+      padding: 3px;
+      margin: 6px 0;
+    }
+
+    /* ── DOC REF LINE ── */
+    .doc-ref {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed #bbb;
+      padding-bottom: 4px;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .sec {
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #666;
+      padding-bottom: 2px;
+      margin: 10px 0 5px 0;
+      color: #222;
+    }
+    .sec.red { border-color: #8a0000; color: #8a0000; }
+
+    /* ── BODY TEXT ── */
+    p {
+      font-size: 9.5px;
+      line-height: 1.75;
+      color: #1a1a0a;
+      margin-bottom: 5px;
+      text-align: justify;
+    }
+    p strong { font-weight: bold; }
+    p em { font-style: italic; color: #444; }
+
+    /* ── REDACTED ── */
+    .redacted {
+      background: #1a1a0a;
+      color: #1a1a0a;
+      display: inline;
+      padding: 0 2px;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+
+    /* ── INFO TABLE ── */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+      font-size: 9px;
+    }
+    .info-table td {
+      padding: 3px 6px;
+      border: 1px solid #bbb;
+      vertical-align: top;
+    }
+    .info-table td:first-child {
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      width: 35%;
+      background: #ede8dc;
+      color: #333;
+    }
+    .info-table td:last-child { color: #1a1a0a; line-height: 1.5; }
+
+    /* ── TWO COLUMNS ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+    /* ── IMAGE BLOCK ── */
+    .img-block {
+      border: 1px solid #aaa;
+      padding: 3px;
+      background: #e8e0cc;
+    }
+    .img-block img {
+      width: 100%;
+      display: block;
+      filter: sepia(0.3) contrast(1.05) brightness(0.95);
+    }
+    .img-caption {
+      font-size: 7.5px;
+      letter-spacing: 1px;
+      color: #666;
+      text-align: center;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    /* ── INTEL BOX ── */
+    .intel-box {
+      border: 1px solid #888;
+      padding: 6px 8px;
+      background: #ede8d8;
+      margin-bottom: 8px;
+    }
+    .intel-box.warning { border-color: #8a0000; border-width: 2px; background: #f5e8e0; }
+    .intel-box-title {
+      font-size: 8px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #555;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .intel-box.warning .intel-box-title { color: #8a0000; }
+
+    /* ── STAMP ── */
+    .stamp {
+      display: inline-block;
+      border: 3px solid #8a0000;
+      color: #8a0000;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      padding: 4px 10px;
+      transform: rotate(-8deg);
+      opacity: 0.75;
+      margin: 6px 0;
+    }
+    .stamp.blue { border-color: #00008a; color: #00008a; transform: rotate(4deg); }
+
+    /* ── TIMELINE ── */
+    .timeline-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 9px;
+    }
+    .tl-date {
+      font-weight: bold;
+      white-space: nowrap;
+      min-width: 80px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+    .tl-text { line-height: 1.6; color: #1a1a0a; }
+
+    /* ── TECHNICAL SPEC BOX ── */
+    .spec-box {
+      border: 1px solid #888;
+      padding: 5px 8px;
+      margin-bottom: 6px;
+      background: #e8e2d0;
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      border-bottom: 1px dotted #bbb;
+      padding: 2px 0;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-key { font-weight: bold; letter-spacing: 0.5px; color: #333; }
+    .spec-val { color: #1a1a0a; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      position: absolute;
+      bottom: -2mm;
+      left: 16mm; right: 16mm;
+      border-top: 1px solid #aaa;
+      padding-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5px;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .btn-bar { display: none !important; }
+      .page {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 10mm 12mm 16mm 12mm;
+        box-shadow: none;
+        border: none;
+        page-break-after: always;
+      }
+      @page { size: A4 portrait; margin: 0; }
+    }

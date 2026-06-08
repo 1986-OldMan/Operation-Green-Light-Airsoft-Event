@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>OPERATION GREEN LIGHT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/index.css" />
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<!-- FAKE CMD WINDOW -->
+<div class="cmd-overlay" id="cmdOverlay">
+  <div class="cmd-titlebar">
+    <span class="cmd-titlebar-text">C:\Windows\System32\cmd.exe — KREMLIN SECURE SHELL</span>
+    <div class="cmd-titlebar-btns">
+      <div class="cmd-titlebar-btn">_</div>
+      <div class="cmd-titlebar-btn">□</div>
+      <div class="cmd-titlebar-btn">✕</div>
+    </div>
+  </div>
+  <div class="cmd-body" id="cmdBody"></div>
+</div>
+
+<!-- DETONATION OVERLAY -->
+<div class="detonation-overlay" id="detonationOverlay">
+  <div class="det-header">⚠ DETONATION SEQUENCE COMPLETE ⚠</div>
+  <div class="det-subtext">ALL 43 WARHEADS DETONATED — EUROPE SECTOR ELIMINATED</div>
+  <div class="video-container">
+    <video id="detonationVideo" controls autoplay playsinline>
+      <source src="https://archive.org/download/CEP_00_071/CEP_00_071_512kb.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <button class="det-close-btn" onclick="closeDetonation()">[ CLOSE TRANSMISSION ]</button>
+</div>
+<div class="flash-white" id="flashWhite"></div>
+
+<!-- MAIN SCREEN -->
+<div class="screen">
+
+  <a href="briefing.html" class="nav-link">► MISSION BRIEFING</a>
+  <a href="print.html" class="nav-link">► MISSION ADLER/PERSEUS</a>
+  <a href="bell.html" class="nav-link">► BELL DOSSIER</a>
+
+  <div id="globalAlert" class="global-alert">⚠ NUCLEAR DETONATION SEQUENCE ACTIVE — ALL SITES ARMED ⚠</div>
+  <div id="defusedBanner" class="defused-banner">✓ ALL WARHEADS SUCCESSFULLY DISARMED — THREAT NEUTRALIZED ✓</div>
+
+  <div class="header">
+    <div class="header-left">
+      <span class="soviet-star">★</span>
+      <div>
+        <div class="header-title">OPERATION GREEN LIGHT</div>
+        <div class="header-sub">CLASSIFIED // EYES ONLY // UNAUTHORIZED ACCESS PUNISHABLE BY DEATH</div>
+      </div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-label">T-MINUS TO DETONATION</div>
+      <div class="countdown-display idle" id="countdownDisplay">--:--</div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-pill idle" id="sysStatus">● SYSTEM STANDBY</div>
+    <div class="status-pill idle" id="armedStatus">● ARMED: 0/43</div>
+    <div class="status-pill ok"  id="defusedStatus">● DEFUSED: 0</div>
+    <div class="status-pill idle" id="seqStatus">● SEQUENCE: INACTIVE</div>
+  </div>
+
+  <div class="main-grid">
+
+    <div>
+      <div class="map-panel">
+        <div class="panel-title">// WARHEAD DEPLOYMENT MAP — EUROPE SECTOR // 43 TARGETS</div>
+        <div class="countries-grid" id="countriesGrid"></div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-title">// ORGANIZER CONTROL PANEL — RESTRICTED ACCESS //</div>
+        <div class="admin-row">
+          <span class="admin-label">ARM CODE:</span>
+          <input class="admin-input" id="adminArmCode" type="text" value="Nuclear_lunch_init_start" maxlength="40" />
+        </div>
+        <div class="admin-row">
+          <span class="admin-label">DISARM CODE:</span>
+          <input class="admin-input" id="adminDisarmCode" type="text" value="Nuclear_lunch_exec_stop" maxlength="40" />
+        </div>
+        <div class="admin-row">
+          <span class="admin-label">TIMER (min):</span>
+          <input class="admin-input timer-input" id="adminTimer" type="text" inputmode="decimal" placeholder="ex: 15" maxlength="6" />
+          <span class="admin-unit">min</span>
+          <button class="admin-btn" onclick="applyAdminSettings()">APPLY</button>
+        </div>
+        <div class="admin-info" id="adminInfo">INTRODU CODURILE ȘI TIMERUL, APOI APASĂ APPLY</div>
+        <div class="wake-status warn" id="wakeStatus">● WAKE LOCK: NOT ACTIVE</div>
+      </div>
+    </div>
+
+    <div class="side-panel">
+      <div class="stats-panel">
+        <div class="panel-title">// SYSTEM STATUS //</div>
+        <div class="stat-row"><span class="stat-label">TOTAL SITES</span><span class="stat-val">43</span></div>
+        <div class="stat-row"><span class="stat-label">ARMED</span><span class="stat-val danger" id="statArmed">0</span></div>
+        <div class="stat-row"><span class="stat-label">DEFUSED</span><span class="stat-val ok" id="statDefused">0</span></div>
+        <div class="stat-row"><span class="stat-label">SEQUENCE</span><span class="stat-val warn" id="statSeq">INACTIVE</span></div>
+        <div class="stat-row"><span class="stat-label">THREAT LVL</span><span class="stat-val" id="statThreat" style="color:#4a6a00">NONE</span></div>
+      </div>
+
+      <div class="terminal-panel">
+        <div class="panel-title">// COMMAND TERMINAL //</div>
+        <div class="terminal-output" id="termOutput">
+          <div class="t-line t-muted">CENTRAL COMMAND INTERFACE v4.1.7</div>
+          <div class="t-line t-muted">SECURE CHANNEL ESTABLISHED</div>
+          <div class="t-line t-muted">────────────────────────────</div>
+          <div class="t-line t-info">TYPE <span style="color:#ffaa00">HELP</span> FOR COMMANDS<span class="blink">_</span></div>
+        </div>
+        <div class="terminal-input-row">
+          <span class="terminal-prompt">$</span>
+          <input class="terminal-input" id="termInput" type="text"
+            autocomplete="off" autocorrect="off" autocapitalize="off"
+            spellcheck="false" enterkeyhint="send" />
+          <button class="send-btn" onclick="submitCommand()">SEND</button>
+        </div>
+      </div>
+
+      <div class="cmd-ref-panel">
+        <div class="cmd-ref-title">// COMMAND REFERENCE //</div>
+        <div class="cmd-list">
+          <div><span class="cmd">HELP</span> — all commands</div>
+          <div><span class="cmd">ARM</span> <span class="arg">[CODE]</span> — activate</div>
+          <div><span class="cmd">DISARM</span> <span class="arg">[CODE]</span> — abort</div>
+          <div><span class="cmd">STATUS</span> — system report</div>
+          <div><span class="cmd">LIST</span> — all sites</div>
+          <div><span class="cmd">SCAN</span> <span class="arg">[COUNTRY]</span></div>
+          <div><span class="cmd">CLEAR</span> — clear terminal</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCRIPTS — ordinea contează! -->
+<script src="js/audio.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/cmd.js"></script>
+<script src="js/state.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

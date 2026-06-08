@@ -1,0 +1,307 @@
+/* ── RESET ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── SCREEN VIEW ── */
+    body {
+      background: #f0ede8;
+      font-family: 'Courier New', Courier, monospace;
+      color: #1a1a1a;
+      padding: 20px;
+    }
+
+    .print-btn-bar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .print-btn {
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      margin: 0 8px;
+    }
+    .print-btn:hover { background: #333; }
+    .back-btn {
+      background: transparent;
+      color: #555;
+      border: 1px solid #555;
+      padding: 10px 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* ── PAGE — each .page is one A4 sheet ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #fff;
+      margin: 0 auto 30px auto;
+      padding: 12mm 14mm;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      position: relative;
+      page-break-after: always;
+    }
+
+    /* ── WATERMARK ── */
+    .page::before {
+      content: 'CLASSIFIED';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      font-size: 72px;
+      font-weight: bold;
+      color: rgba(180,0,0,0.07);
+      letter-spacing: 8px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      border-top: 3px solid #1a1a1a;
+      border-bottom: 3px solid #1a1a1a;
+      padding: 6px 0;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .page-header-title {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .page-header-meta {
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-align: right;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .classification-top {
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: #800000;
+      font-weight: bold;
+      margin-bottom: 8px;
+      border: 1px solid #800000;
+      padding: 3px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1a1a1a;
+      padding-bottom: 3px;
+      margin: 10px 0 6px 0;
+      color: #333;
+    }
+
+    /* ── STORY BOX ── */
+    .story-box {
+      border: 1px solid #999;
+      padding: 8px 10px;
+      font-size: 10px;
+      line-height: 1.7;
+      color: #222;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+    .story-box p { margin-bottom: 5px; }
+    .story-box p:last-child { margin-bottom: 0; }
+
+    /* ── TWO COLUMNS ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* ── TEAM BLOCK ── */
+    .team-block {
+      border: 2px solid;
+      padding: 8px;
+    }
+    .team-block.adler  { border-color: #1a1a1a; }
+    .team-block.perseus { border-color: #800000; }
+
+    .team-header-print {
+      border-bottom: 1px solid;
+      padding-bottom: 5px;
+      margin-bottom: 7px;
+    }
+    .team-block.adler  .team-header-print { border-color: #1a1a1a; }
+    .team-block.perseus .team-header-print { border-color: #800000; }
+
+    .team-name-print {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .team-block.adler  .team-name-print { color: #1a1a1a; }
+    .team-block.perseus .team-name-print { color: #800000; }
+
+    .team-faction {
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: #555;
+      margin-top: 2px;
+    }
+    .team-objective {
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 3px;
+    }
+    .team-block.adler  .team-objective { color: #1a1a1a; }
+    .team-block.perseus .team-objective { color: #800000; }
+
+    /* ── MISSION ITEM ── */
+    .mission-item-print {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 7px;
+      padding-bottom: 7px;
+      border-bottom: 1px dashed #ccc;
+    }
+    .mission-item-print:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .mission-num-print {
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 18px;
+      text-align: center;
+      padding-top: 2px;
+    }
+    .team-block.adler  .mission-num-print { color: #1a1a1a; }
+    .team-block.perseus .mission-num-print { color: #800000; }
+
+    .mission-title-print {
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .mission-desc-print {
+      font-size: 9px;
+      line-height: 1.6;
+      color: #333;
+    }
+    .mission-phase {
+      font-size: 8px;
+      letter-spacing: 1px;
+      margin-top: 3px;
+      font-weight: bold;
+    }
+    .team-block.adler  .mission-phase { color: #444; }
+    .team-block.perseus .mission-phase { color: #800000; }
+
+    /* ── MAPS SECTION ── */
+    .maps-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .map-box {
+      border: 1px solid #999;
+      padding: 4px;
+    }
+    .map-box img {
+      width: 100%;
+      display: block;
+      filter: contrast(1.05) brightness(0.95);
+    }
+    .map-caption {
+      font-size: 8px;
+      letter-spacing: 1px;
+      color: #555;
+      text-align: center;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ── CODES BOX ── */
+    .codes-box {
+      border: 2px solid #1a1a1a;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #f5f5f5;
+    }
+    .code-item {
+      text-align: center;
+    }
+    .code-label {
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .code-value {
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    .code-value.arm    { color: #800000; }
+    .code-value.disarm { color: #1a4a1a; }
+    .code-value.timer  { color: #1a1a1a; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      position: absolute;
+      bottom: 8mm;
+      left: 14mm;
+      right: 14mm;
+      border-top: 1px solid #ccc;
+      padding-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      .print-btn-bar { display: none !important; }
+      .page {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 10mm 12mm;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
