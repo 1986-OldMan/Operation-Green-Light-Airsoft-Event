@@ -32,8 +32,6 @@ Images used from the game are sourced from publicly available screenshots and ar
 
 ### AI Assistance
 This project was built with the assistance of **Claude AI** (Anthropic) as a coding companion. Claude helped write and iterate on:
-- HTML structure and layout
-- CSS styling (terminal aesthetic, print layouts)
 - JavaScript (Web Audio API, game logic, speech synthesis, timers)
 - Copywriting for lore text and mission briefings
 
