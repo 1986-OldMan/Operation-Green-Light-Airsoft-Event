@@ -113,7 +113,7 @@ operation-green-light/
 ## 📍 Event Location
 
 **Vestfellas Jimbolia** — Jimbolia, Romania 
-
+            - OR -
 **Vulturii Jena** — Jena, Romania 
 
 ---
